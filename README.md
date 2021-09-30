@@ -11,10 +11,10 @@ Deverá estar em algum versionamento de código (github, gitlab, etc)
 - Código fonte do programa
 
 # Lexico.py
-Classe Lex implementa o analisador léxico, com métodos de tokenização, diagrama das regras na pasta /diagramas
+Classe Lex implementa o analisador léxico, com métodos de tokenização. Diagrama das regras na pasta /diagramas
 
 # Sintatico.py
 Classe Sintatico implementa analise sintatica da linguagem, com os metodos das regras de produção e controla o analisador léxico.
 
-# Semantico
+# Semantico.py
 Em produção...
