@@ -9,3 +9,12 @@ Deverá estar em algum versionamento de código (github, gitlab, etc)
 - Automato do analisador léxico
 - A gramática com as regras semânticas
 - Código fonte do programa
+
+# Lexico.py
+Classe Lex implementa o analisador léxico, com métodos de tokenização, diagrama das regras na pasta /diagramas
+
+# Sintático
+Classe Sintatico implementa analise sintatica da linguagem, com os metodos das regras de produção e controla o analisador léxico.
+
+# Semantico
+Em produção...
