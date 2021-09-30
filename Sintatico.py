@@ -8,6 +8,50 @@ class Sintatico:
         self.termo = ''
 
 
+    #FUNCOES <------------------------------------------------ <-
+    def P():
+
+    def C():
+
+    def DC():
+
+    def DCV():
+
+    def TPV():
+
+    def VAR():
+
+    def MVAR():
+
+    def CMS():
+
+    def MCM():
+
+    def CM():
+
+    def COND():
+
+    def REL():
+
+    def EXP():
+
+    def TERM():
+
+    def OPU():
+
+    def FATOR():
+
+    def OTERM():
+
+    def OPAD():
+
+    def MFATOR():
+
+    def OPMUL():
+
+    def PFALSA():
+
+
 
 
 
@@ -32,5 +76,4 @@ class Sintatico:
     print(lex.Tokens)
 
     simbolo(lex)
-
 
