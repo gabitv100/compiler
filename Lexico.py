@@ -1,8 +1,4 @@
 
-#le arquivo
-
-
-
 class Lex:
     Tokens = []
     termo = ''
@@ -16,6 +12,7 @@ class Lex:
 
     def disparaErro(c):
         print("TOKEN DESCONHECIDO:" + c)
+        Lex.Tokens.append({'tipo': "Desconhecido", 'termo': c})
         termo=''
 
 
@@ -49,8 +46,6 @@ class Lex:
         if estado == 0:
             if Lex.letra(c):
                 estado = 2
-                print(estado)
-                print(c)
                 Lex.termo = Lex.termo + c
                 return estado
             elif Lex.numero(c):
@@ -59,6 +54,7 @@ class Lex:
                 return estado
             elif Lex.espaco(c):
                 estado = 4
+
                 return estado
             elif Lex.matematico(c):
                 estado = 6
@@ -103,7 +99,7 @@ class Lex:
                 estado == 2
                 Lex.termo = Lex.termo + c
                 return estado
-            else:
+            elif Lex.espaco(c):
                 print('LEX: ' +  Lex.termo)
                 if Lex.termo in Lex.reservadas:
                     Lex.Tokens.append({'tipo':"RESERVADA",'termo': Lex.termo})
@@ -112,6 +108,20 @@ class Lex:
                 # ["VARIAVEL"] = Lex.termo
                 Lex.termo = ''
                 return 0
+            else:
+                print('LEX: ' + Lex.termo)
+                if Lex.termo in Lex.reservadas:
+                    Lex.Tokens.append({'tipo': "RESERVADA", 'termo': Lex.termo})
+                else:
+                    Lex.Tokens.append({'tipo': "VARIAVEL", 'termo': Lex.termo})
+                # ["VARIAVEL"] = Lex.termo
+                Lex.termo = ''
+
+                Lex.disparaErro(c) # SITUAÇÃO DE TOKEN DESCONHECIDO, COMO NAO CONTO POSICAO, ISTO EVITA USO DE UMA FUNÇÃO BACK()
+                estado = 0
+                return estado
+
+
         if estado == 3:
             if Lex.numero(c):
                 estado = 3
@@ -127,8 +137,6 @@ class Lex:
         if estado == 4:
             if Lex.letra(c):
                 estado = 2
-                print(estado)
-                print(c)
                 Lex.termo = Lex.termo + c
                 return estado
             elif Lex.numero(c):
@@ -137,7 +145,22 @@ class Lex:
                 return estado
             elif Lex.espaco(c):
                 estado = 4
+
                 return estado
+            elif Lex.matematico(c):
+                estado = 6
+                Lex.Tokens.append({'tipo': "OPERADOR MATEMATICO", 'termo': c})
+                estado = 0
+                return estado
+            elif Lex.logico(c):
+                estado = 7
+
+                Lex.termo = Lex.termo + c
+                return estado
+            elif Lex.fluxo(c):
+                estado = 10
+                Lex.Tokens.append({'tipo': "OPERADOR FLUXO", 'termo': c})
+                return 0
             else:
                 Lex.disparaErro(c)
                 return 0
