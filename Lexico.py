@@ -7,6 +7,7 @@ class Lex:
     Tokens = []
     termo = ''
     reservadas = ['program', 'real','integer','begin','read', 'if', 'then','write','else', 'end']
+    pos= 0
 
     def __init__(self):
         self.termo = ''
@@ -61,7 +62,7 @@ class Lex:
                 return estado
             elif Lex.matematico(c):
                 estado = 6
-                Lex.Tokens.append({"OPERADOR MATEMATICO": c})
+                Lex.Tokens.append({'tipo':"OPERADOR MATEMATICO", 'termo' : c})
                 estado=0
                 return estado
             elif Lex.logico(c):
@@ -71,7 +72,7 @@ class Lex:
                 return estado
             elif Lex.fluxo(c):
                 estado = 10
-                Lex.Tokens.append({"OPERADOR FLUXO": c})
+                Lex.Tokens.append({'tipo':"OPERADOR FLUXO",'termo': c})
                 return 0
             else:
                 Lex.disparaErro(c)
@@ -90,7 +91,7 @@ class Lex:
                 return 0
             else:
                 # estado 5
-                Lex.Tokens.append({"INTEIRO": Lex.termo})
+                Lex.Tokens.append({'tipo':"INTEIRO",'termo': Lex.termo})
                 Lex.termo = ''
                 return 0
         if estado == 2:
@@ -105,9 +106,9 @@ class Lex:
             else:
                 print('LEX: ' +  Lex.termo)
                 if Lex.termo in Lex.reservadas:
-                    Lex.Tokens.append({"RESERVADA": Lex.termo})
+                    Lex.Tokens.append({'tipo':"RESERVADA",'termo': Lex.termo})
                 else:
-                    Lex.Tokens.append({"VARIAVEL": Lex.termo})
+                    Lex.Tokens.append({'tipo':"VARIAVEL",'termo': Lex.termo})
                 # ["VARIAVEL"] = Lex.termo
                 Lex.termo = ''
                 return 0
@@ -120,7 +121,7 @@ class Lex:
                 Lex.disparaErro(c)
                 return 0
             else:
-                Lex.Tokens.append({"FLOAT": Lex.termo})
+                Lex.Tokens.append({'tipo':"FLOAT",'termo':Lex.termo})
                 Lex.termo = ''
                 return 0
         if estado == 4:
@@ -143,16 +144,16 @@ class Lex:
         if estado == 7:
             if Lex.logico(c):
                 Lex.termo = Lex.termo + c
-                Lex.Tokens.append({"LOGICO": Lex.termo})
+                Lex.Tokens.append({'tipo':"LOGICO",'termo':Lex.termo})
                 Lex.termo = ''
             elif Lex.espaco(c):
                 if Lex.termo == '=':
                     estado = 8
-                    Lex.Tokens.append({"ATRIBUICAO": Lex.termo})
+                    Lex.Tokens.append({'tipo':"ATRIBUICAO", 'termo':Lex.termo})
                     Lex.termo = ''
                     return 0
                 else:
-                    Lex.Tokens.append({"LOGICO": Lex.termo})
+                    Lex.Tokens.append({'tipo':"LOGICO",'termo':Lex.termo})
                     Lex.termo = ''
                     return 0
 
