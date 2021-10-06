@@ -18,3 +18,9 @@ Classe Sintatico implementa analise sintatica da linguagem, com os metodos das r
 
 # Semantico.py
 Em produção...
+
+
+
+# Detalhes:
+1. A regra de atribuição foi alterada de (:=) para (=)
+2. O arquivo teste.txt fornecido no na tarefa possui erros sintaticos, para teste usar o arquivo CORRETO_teste.txt, ambos em /Exmeplos
