@@ -29,21 +29,48 @@ def disparaErro(esperado):
 # FUNCOES <------------------------------------------------ <-
 
 
+def MVAR(lex):
+    if lex.simbolo == ',':
+        getSimbolo(lex)
+        VAR(lex)
+    else:
+        return lex
+
+def VAR(lex):
+    if lex.tipo == 'VARIAVEL':
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+        MVAR(lex)
+    else:
+        disparaErro(' alguma variavel')
+
+
+
 
 def TPV(lex):
     if lex.simbolo in ['real','integer']:
-        return lex
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
     else:
         disparaErro('real ou integer')
 
-def DCV():
+def DCV(lex):
+    TPV(lex)
+    if lex.simbolo == ':':
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+        VAR(lex)
+    else:
+        disparaErro(' : ')
 
-def MDV():
-
-
+def MDV(lex):
+    if lex.simbolo == ';':
+        DC(lex)
+    else:
+        disparaErro(';')
 def DC(lex):
-    lex = DCV(lex)
-    lex = MDV(lex)
+    DCV(lex)
+    MDV(lex)
     if lex.tipo =='DESCONHECIDO':
         return lex
 
@@ -95,6 +122,7 @@ def sP(lex):
     else:
         disparaErro('program')
 
+
 def getSimbolo(lex):
     simbolo = lex.Tokens[lex.pos]['termo']
     tipo = lex.Tokens[lex.pos]['tipo']
@@ -106,9 +134,7 @@ def getSimbolo(lex):
 
 sP(lex)
 
-#
-# def VAR():
-#
+
 # def MVAR():
 #
 # def CMS():
