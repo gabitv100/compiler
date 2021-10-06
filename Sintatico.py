@@ -80,11 +80,12 @@ def DC(lex):
     else:
         disparaErro('DC')
 
-def MCM():
+def MCM(lex):
     if lex.simbolo == ';':
         print('DEBUG: ' + lex.simbolo)
-        getSimbolo()
-        
+        getSimbolo(lex)
+        CMS(lex) # PODE TER RECURSAO INFINITA AQUI
+
 
 
 
@@ -100,7 +101,7 @@ def CM(lex):
                 getSimbolo(lex)
                 if lex.simbolo == ')':
                     print('DEBUG: ' + lex.simbolo)
-                    getSimbolo()
+                    getSimbolo(lex)
                     MCM(lex)
                 else:
                     disparaErro(')')
