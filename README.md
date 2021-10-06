@@ -24,5 +24,5 @@ Em produção...
 # Detalhes:
 1. A regra de atribuição foi alterada de (:=) para (=)
 2. O arquivo teste.txt fornecido no na tarefa possui erros sintaticos, para teste usar o arquivo CORRETO_teste.txt, ambos em /Exmeplos
-3. Para rodar, clonar e extrair, rodar:
+3. Para rodar, clonar e extrair, executar:
 ## $python3 Sintatico.py
