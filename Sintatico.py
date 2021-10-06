@@ -36,6 +36,7 @@ def MVAR(lex):
     else:
         return lex
 
+
 def VAR(lex):
     if lex.tipo == 'VARIAVEL':
         print('DEBUG: ' + lex.simbolo)
@@ -70,17 +71,46 @@ def MDV(lex):
         disparaErro(';')
 def DC(lex):
     DCV(lex)
-    MDV(lex)
-    if lex.tipo =='DESCONHECIDO':
+    if lex.simbolo == ';':
+        getSimbolo(lex)
+        DCV(lex)
         return lex
+    elif lex.tipo == 'RESERVADA':
+        DC(lex)
+    else:
+        disparaErro('DC')
+
+def MCM():
+    if lex.simbolo == ';':
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo()
+        
 
 
 
-
-
+def CM(lex):
+    if lex.simbolo in ['read','write']:
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+        if lex.simbolo == '(':
+            print('DEBUG: ' + lex.simbolo)
+            getSimbolo(lex)
+            if lex.tipo == 'VARIAVEL':
+                print('DEBUG: ' + lex.simbolo)
+                getSimbolo(lex)
+                if lex.simbolo == ')':
+                    print('DEBUG: ' + lex.simbolo)
+                    getSimbolo()
+                    MCM(lex)
+                else:
+                    disparaErro(')')
+            else:
+                disparaErro('nome de variavel')
+        else:
+            disparaErro('(')
 
 def CMS(lex):
-    print(lex.simbolo)
+    CM(lex)
 
 
 def C(lex):
@@ -88,6 +118,7 @@ def C(lex):
         lex = DC(lex)
         getSimbolo(lex)
         if lex.simbolo == 'begin':
+            print('DEBUG: '+ lex.simbolo)
             getSimbolo(lex)
             CMS(lex)
             getSimbolo(lex)
@@ -95,7 +126,8 @@ def C(lex):
                 print('>>>>>> Sucesso de compilação! <<<<<<<<')
             else:
                 disparaErro('end')
-        disparaErro('begin')
+        else:
+            disparaErro('begin')
     elif lex.simbolo == 'begin': #NAO HOUVE VARIAVEIS
         getSimbolo(lex)
         CMS(lex)
@@ -135,11 +167,10 @@ def getSimbolo(lex):
 sP(lex)
 
 
-# def MVAR():
+
+print('DEBUG: ' + lex.simbolo)
+
 #
-# def CMS():
-#
-# def MCM():
 #
 # def CM():
 #
