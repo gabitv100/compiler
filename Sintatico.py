@@ -27,8 +27,30 @@ def disparaErro(esperado):
 
 
 # FUNCOES <------------------------------------------------ <-
+
+
+
+def TPV(lex):
+    if lex.simbolo in ['real','integer']:
+        return lex
+    else:
+        disparaErro('real ou integer')
+
+def DCV():
+
+def MDV():
+
+
 def DC(lex):
-    print(lex.simbolo)
+    lex = DCV(lex)
+    lex = MDV(lex)
+    if lex.tipo =='DESCONHECIDO':
+        return lex
+
+
+
+
+
 
 def CMS(lex):
     print(lex.simbolo)
@@ -36,7 +58,7 @@ def CMS(lex):
 
 def C(lex):
     if lex.tipo == 'RESERVADA':
-        DC(lex)
+        lex = DC(lex)
         getSimbolo(lex)
         if lex.simbolo == 'begin':
             getSimbolo(lex)
@@ -83,12 +105,7 @@ def getSimbolo(lex):
 
 
 sP(lex)
-#
-# def DC():
-#
-# def DCV():
-#
-# def TPV():
+
 #
 # def VAR():
 #
