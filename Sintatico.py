@@ -109,6 +109,10 @@ def CM(lex):
                 disparaErro('nome de variavel')
         else:
             disparaErro('(')
+    elif lex.tipo == 'VARIAVEL':
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+
 
 def CMS(lex):
     CM(lex)
