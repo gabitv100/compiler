@@ -86,7 +86,7 @@ def MCM(lex):
         getSimbolo(lex)
         CMS(lex) # PODE TER RECURSAO INFINITA AQUI
 
-def MFATOR(lex):
+# def MFATOR(lex):
 
 
 def FATOR(lex):
@@ -107,17 +107,17 @@ def OPUN(lex):
     if lex.simbolo == '-':
         getSimbolo(lex)
 
-def OTERM(lex):
+# def OTERM(lex):
 
 
 def TERM(lex):
     OPUN(lex)
     FATOR(lex)
-    MFATOR(lex)
+    # MFATOR(lex)
 
 def EXP(lex):
     TERM(lex)
-    OTERM(lex)
+    # OTERM(lex)
 
 
 
@@ -218,7 +218,7 @@ print('DEBUG: ' + lex.simbolo)
 # def REL()
 
 #
-# def OPU():
+
 #
 # def FATOR():
 #
