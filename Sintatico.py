@@ -86,6 +86,38 @@ def MCM(lex):
         getSimbolo(lex)
         CMS(lex) # PODE TER RECURSAO INFINITA AQUI
 
+def MFATOR(lex):
+
+
+def FATOR(lex):
+    if lex.tipo in ['INTEIRO','FLOAT','VARIAVEL']:
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+    elif lex.simbolo=='(':
+        print('DEBUG: ' + lex.simbolo)
+        EXP(lex)
+        if lex.simbolo == ')':
+            getSimbolo(lex)
+        else:
+            disparaErro(') ')
+
+
+
+def OPUN(lex):
+    if lex.simbolo == '-':
+        getSimbolo(lex)
+
+def OTERM(lex):
+
+
+def TERM(lex):
+    OPUN(lex)
+    FATOR(lex)
+    MFATOR(lex)
+
+def EXP(lex):
+    TERM(lex)
+    OTERM(lex)
 
 
 
@@ -112,6 +144,13 @@ def CM(lex):
     elif lex.tipo == 'VARIAVEL':
         print('DEBUG: ' + lex.simbolo)
         getSimbolo(lex)
+        if lex.tipo == 'ATRIBUICAO':
+            getSimbolo(lex)
+            EXP(lex)
+
+
+
+
 
 
 def CMS(lex):
@@ -176,16 +215,8 @@ sP(lex)
 print('DEBUG: ' + lex.simbolo)
 
 #
-#
-# def CM():
-#
-# def COND():
-#
-# def REL():
-#
-# def EXP():
-#
-# def TERM():
+# def REL()
+
 #
 # def OPU():
 #
