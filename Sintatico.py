@@ -147,6 +147,7 @@ def CM(lex):
         if lex.tipo == 'ATRIBUICAO':
             getSimbolo(lex)
             EXP(lex)
+    if lex.tipo ==''
 
 
 
