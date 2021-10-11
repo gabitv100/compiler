@@ -17,7 +17,7 @@ estado = 0
 
 for i in unica_string:
     estado = lex.nextToken(estado=estado, c=i, self='')
-    print('Estado atual -> ' + str(estado))
+    # print('Estado atual -> ' + str(estado))
 print(lex.Tokens)
 listaTokens = (lex.Tokens)
 
@@ -86,8 +86,20 @@ def MCM(lex):
         getSimbolo(lex)
         CMS(lex) # PODE TER RECURSAO INFINITA AQUI
 
-# def MFATOR(lex):
+def OPMUL(lex):
+    if lex.simbolo in ['*','/']:
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+    else:
+        disparaErro('Operador multiplicação')
 
+def MFATOR(lex):
+    if lex.simbolo in ['*','/']:
+        OPMUL(lex)
+        FATOR(lex)
+        MFATOR(lex) #verificar recursao infinitas
+    else:
+        print('DEBUG: CADEIA VAZIA')
 
 def FATOR(lex):
     if lex.tipo in ['INTEIRO','FLOAT','VARIAVEL']:
@@ -105,20 +117,53 @@ def FATOR(lex):
 
 def OPUN(lex):
     if lex.simbolo == '-':
+        print('DEBUG: ' + lex.simbolo)
         getSimbolo(lex)
 
-# def OTERM(lex):
+def OPAD(lex):
+    if lex.simbolo in ['+','-']:
+        # print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+    else:
+        disparaErro("Operador de soma")
+
+
+def OTERM(lex):
+    if lex.simbolo in ['+','-']:
+        print('DEBUG: ' + lex.simbolo)
+        OPAD(lex)
+        TERM(lex)
+        OTERM(lex)
+    else:
+        print('DEBUG: CADEIA VAZIA')
 
 
 def TERM(lex):
     OPUN(lex)
     FATOR(lex)
-    # MFATOR(lex)
+    MFATOR(lex)
 
 def EXP(lex):
     TERM(lex)
-    # OTERM(lex)
+    OTERM(lex)
 
+def REL(lex):
+    if lex.tipo=='LOGICO':
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+    else:
+        disparaErro('operador lógico')
+
+
+def COND(lex):
+    EXP(lex)
+    REL(lex)
+    EXP(lex)
+
+def PFALSA(lex):
+    if lex.simbolo=='else':
+        print('DEBUG: ' + lex.simbolo)
+        CMS(lex)
 
 
 def CM(lex):
@@ -145,9 +190,18 @@ def CM(lex):
         print('DEBUG: ' + lex.simbolo)
         getSimbolo(lex)
         if lex.tipo == 'ATRIBUICAO':
+            print('DEBUG: ' + lex.simbolo)
             getSimbolo(lex)
             EXP(lex)
-    if lex.tipo ==''
+    elif lex.simbolo in ['if','IF']:
+        print('DEBUG: ' + lex.simbolo)
+        getSimbolo(lex)
+        COND(lex)
+        if lex.simbolo == 'then':
+            getSimbolo(lex)
+            CMS(lex)
+            PFALSA(lex)
+
 
 
 
